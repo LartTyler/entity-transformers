@@ -1,0 +1,27 @@
+{
+	"name": "dbstudios/entity-transformers",
+	"type": "library",
+	"description": "A base system for creating objects to update Doctrine entities",
+	"authors": [
+		{
+			"name": "Tyler Lartonoix",
+			"email": "tyler@lartonoix.com",
+			"homepage": "https://github.com/LartTyler"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"DaybreakStudios\\Utility\\EntityTransformers\\":  "src/"
+		}
+	},
+	"require": {
+		"php": ">=7.2",
+		"dbstudios/doctrine-entities": "^1.0"
+	},
+	"require-dev": {
+		"doctrine/orm": "^2.6"
+	},
+	"suggest": {
+		"doctrine/orm": "if you plan on using the built-in AbstractEntityTransformer"
+	}
+}
