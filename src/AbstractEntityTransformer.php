@@ -28,7 +28,7 @@
 			$entity = $this->doCreate($data);
 			$this->update($entity, $data);
 
-			$this->entityManager->persist($data);
+			$this->entityManager->persist($entity);
 
 			return $entity;
 		}
