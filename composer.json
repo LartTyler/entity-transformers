@@ -2,6 +2,7 @@
 	"name": "dbstudios/entity-transformers",
 	"type": "library",
 	"description": "A base system for creating objects to update Doctrine entities",
+	"license": "GPL-3.0-or-later",
 	"authors": [
 		{
 			"name": "Tyler Lartonoix",
