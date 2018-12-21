@@ -74,31 +74,12 @@
 
 		/**
 		 * @param ConstraintViolationListInterface $errors
-		 * @param int                              $limit
 		 *
 		 * @return static
 		 */
-		public static function fromConstraintViolationList(ConstraintViolationListInterface $errors, int $limit = 3) {
-			$messages = [];
+		public static function fromConstraintViolationList(ConstraintViolationListInterface $errors) {
+			$error = $errors->get(0);
 
-			foreach ($errors as $index => $error) {
-				if ($index === $limit) {
-					$remaining = $errors->count() - $index - 1;
-
-					$messages[] = sprintf('and %d other%s', $remaining, $remaining !== 1 ? 's' : '');
-
-					break;
-				}
-
-				$messages[] = sprintf('%s (at %s)', $error->getMessage(), $error->getPropertyPath());
-			}
-
-			return new static(
-				sprintf(
-					'Validation failed with the following message%s: %s',
-					$errors->count() !== 1 ? 's' : '',
-					implode(', ', $messages)
-				)
-			);
+			return new static(sprintf('Error validating "%s": %s', $error->getPropertyPath(), $error->getMessage()));
 		}
 	}
