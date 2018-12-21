@@ -2,6 +2,7 @@
 	namespace DaybreakStudios\Utility\EntityTransformers\Exceptions;
 
 	use DaybreakStudios\Utility\EntityTransformers\Utility\StringUtil;
+	use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 	class ValidationException extends EntityTransformerException {
 		/**
@@ -69,5 +70,35 @@
 		 */
 		public static function fieldNotSupported(string $field) {
 			return new static('The transformer does not support updates to ' . $field);
+		}
+
+		/**
+		 * @param ConstraintViolationListInterface $errors
+		 * @param int                              $limit
+		 *
+		 * @return static
+		 */
+		public static function fromConstraintViolationList(ConstraintViolationListInterface $errors, int $limit = 3) {
+			$messages = [];
+
+			foreach ($errors as $index => $error) {
+				if ($index === $limit) {
+					$remaining = $errors->count() - $index - 1;
+
+					$messages[] = sprintf('and %d other%s', $remaining, $remaining !== 1 ? 's' : '');
+
+					break;
+				}
+
+				$messages[] = sprintf('%s (at %s)', $error->getMessage(), $error->getPropertyPath());
+			}
+
+			return new static(
+				sprintf(
+					'Validation failed with the following message%s: %s',
+					$errors->count() !== 1 ? 's' : '',
+					implode(', ', $messages)
+				)
+			);
 		}
 	}
