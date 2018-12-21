@@ -2,8 +2,8 @@
 	namespace DaybreakStudios\Utility\EntityTransformers;
 
 	use DaybreakStudios\Utility\DoctrineEntities\EntityInterface;
+	use DaybreakStudios\Utility\EntityTransformers\Exceptions\ConstraintViolationException;
 	use DaybreakStudios\Utility\EntityTransformers\Exceptions\IntegrityException;
-	use DaybreakStudios\Utility\EntityTransformers\Exceptions\ValidationException;
 	use Doctrine\Common\Collections\Collection;
 	use Doctrine\ORM\EntityManagerInterface;
 	use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -126,6 +126,6 @@
 			$errors = $this->validator->validate($entity);
 
 			if ($errors->count())
-				throw ValidationException::fromConstraintViolationList($errors);
+				throw new ConstraintViolationException($errors);
 		}
 	}

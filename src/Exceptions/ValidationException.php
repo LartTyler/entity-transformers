@@ -71,15 +71,4 @@
 		public static function fieldNotSupported(string $field) {
 			return new static('The transformer does not support updates to ' . $field);
 		}
-
-		/**
-		 * @param ConstraintViolationListInterface $errors
-		 *
-		 * @return static
-		 */
-		public static function fromConstraintViolationList(ConstraintViolationListInterface $errors) {
-			$error = $errors->get(0);
-
-			return new static(sprintf('Error validating "%s": %s', $error->getPropertyPath(), $error->getMessage()));
-		}
 	}
