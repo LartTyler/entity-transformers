@@ -2,6 +2,7 @@
 	namespace DaybreakStudios\Utility\EntityTransformers\Exceptions;
 
 	use DaybreakStudios\Utility\EntityTransformers\Utility\StringUtil;
+	use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 	class ValidationException extends EntityTransformerException {
 		/**
