@@ -37,6 +37,9 @@ Vagrant.configure("2") do |config|
 		echo "user=application" >> ~/.my.cnf
 		echo "database=application" >> ~/.my.cnf
 
+		cd /vagrant
+		composer install
+
 		echo
 		echo "Installed packages:"
 		echo "  -> PHP 7.2 (with extensions: zip, mbstring, xml, xdebug)"
