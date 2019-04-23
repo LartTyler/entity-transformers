@@ -18,9 +18,12 @@
 		 *
 		 * @return static
 		 */
-		public static function duplicateUniqueValue(string $field, int $collisionId) {
-			return new static(
-				sprintf('The value of %s must be a unique value, but it collides with #%d', $field, $collisionId)
-			);
+		public static function duplicateUniqueValue(string $field, int $collisionId = null) {
+			$message = sprintf('The value of %s must be unique value', $field);
+
+			if ($collisionId !== null)
+				$message .= sprintf(', but it collides with #%d', $collisionId);
+
+			return new static($message);
 		}
 	}
