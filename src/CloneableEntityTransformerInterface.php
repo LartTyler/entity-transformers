@@ -15,11 +15,15 @@
 		 * A {@see ValidationException} will be thrown if any of the following conditions are met.
 		 *     - Any value does not match it's expected type.
 		 *
-		 * @param EntityInterface $entity
+		 * @param EntityInterface $source
 		 * @param object|null     $data
 		 * @param bool            $skipValidation
 		 *
 		 * @return EntityInterface
 		 */
-		public function clone(EntityInterface $entity, ?object $data = null, bool $skipValidation = false): EntityInterface;
+		public function clone(
+			EntityInterface $source,
+			?object $data = null,
+			bool $skipValidation = false
+		): EntityInterface;
 	}
